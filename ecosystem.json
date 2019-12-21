@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "name": "DES-api",
+      "script": "./bin/api.js",
+      "instances": 1,
+      "exec_mode": "fork_mode",
+      "env": {
+        "NODE_ENV": "production",
+        "APIPORT": 3060,
+        "NODE_PATH": "./api"
+      }
+    }
+  ]
+}
