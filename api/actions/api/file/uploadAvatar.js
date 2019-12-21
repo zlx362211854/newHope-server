@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 import config from '../../config';
 import fs from 'fs';
-import { argsFilter } from '../../lib/util';
+import {argsFilter} from '../../lib/util';
+import {roleAuthPromise} from "../../lib/auth";
 const File = mongoose.model('File');
 const Signup = mongoose.model('Signup');
 export default async req => {
+  console.log(req.session.user, 'req.session.user??')
+  await roleAuthPromise(req, 'read', 'post');
   const args = await argsFilter(req.body, {
     userId: ['required', 'string']
   });
