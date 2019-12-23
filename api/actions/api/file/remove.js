@@ -9,6 +9,7 @@ export default function (req) {
     const {id} = req.body;
     File.findOne({_id: id})
       .exec((error, doc) => {
+        console.log(doc, 'doc===')
         if (error) {
           console.log(error);
           reject({msg: 'Fail!'});
