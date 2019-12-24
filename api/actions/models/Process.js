@@ -9,7 +9,7 @@ const schema = mongoose.Schema({
   creator: {type: ObjectId, ref: 'Signup'}, // 关联用户id
   title: String, // 标题
   content: String, // 内容
-  files: [{type: Schema.Types.ObjectId, ref: 'File'}], // 文件列表,关联文件id
+  files: [{displayName: String, file: {type: Schema.Types.ObjectId, ref: 'File'}}], // 文件列表,关联文件id
   deleted: { type: Boolean, default: false },
   create_time: { type: Number, default: getTime },
   update_time: Number
