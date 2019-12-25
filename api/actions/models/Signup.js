@@ -3,7 +3,7 @@ import { getTime } from "../lib/util";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 // user申请
 const schema = mongoose.Schema({
-  role: String, // 角色
+  role: { type: String, default: 'user' }, // 角色 super_admin: 超级管理员 admin: 管理员 user:用户
   name: String, // name
   pass: String,
   avatar: {type: ObjectId, ref: 'File'}, // 头像id -> file id

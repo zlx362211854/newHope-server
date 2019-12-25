@@ -7,8 +7,7 @@ const Signup = mongoose.model("Signup");
 export default async req => {
   const args = await argsFilter(req.body, {
     name: ["required", "string"],
-    pass: ["required", "string"],
-    role: "string"
+    pass: ["required", "string"]
   });
   const count = await Signup.count({
     name: req.body.name

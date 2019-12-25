@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { getTime } from "../lib/util";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-var Schema = mongoose.Schema;
 // Orgs model
 const schema = mongoose.Schema({
   id: ObjectId, // id
