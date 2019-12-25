@@ -6,3 +6,4 @@ export * as sync from "./api/sync";
 export * as posts from "./api/posts";
 export * as groups from "./api/groups";
 export * as process from "./api/process";
+export * as orgs from "./api/orgs";

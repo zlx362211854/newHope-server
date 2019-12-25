@@ -10,6 +10,11 @@ export default async req => {
   if (!user) {
     throw { code: code.fail, msg: '用户不存在！' };
   }
-  const processList = await Process.find({creator: userId}).populate('creator').populate('files.file');
+  const processList = await Process.find({creator: userId}).populate({
+    path: 'creator',
+    populate: {
+      path: 'avatar'
+    }
+  }).populate('files.file').sort({create_time: -1});
   return { code: code.success, data: processList };
 };

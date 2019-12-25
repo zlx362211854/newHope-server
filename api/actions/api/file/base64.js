@@ -10,14 +10,15 @@ const image = new Base64File();
 const kFileFolder = path.join(__dirname, "../../../uploads/");
 
 export default async function(req) {
-  const {base64, id, args} = await argsFilter(req.body, {
+  const {base64, id, type} = await argsFilter(req.body, {
     base64: ["required", "string"],
-    id: ["required", "string"]
+    id: ["required", "string"],
+    type: "string"
   });
   const base64Str = base64.split(",")[1];
   const name = `${uuid().toString()}.jpeg`;
   await image.save(base64Str, kFileFolder, name);
-  const file = new File(args);
+  const file = new File({type});
   file.name = name;
   file.deleted = false;
   await file.save();
