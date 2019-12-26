@@ -4,3 +4,6 @@ export account from "./account";
 export login from './login'
 export search from './search'
 export update from './update'
+export list from './list'
+export pass from './pass'
+export remove from './remove'

@@ -7,7 +7,8 @@ const schema = mongoose.Schema({
   name: String, // name
   pass: String,
   avatar: {type: ObjectId, ref: 'File'}, // 头像id -> file id
-  type: { type: String },
+  org: {type: ObjectId, ref: 'Orgs'}, // 
+  type: { type: String }, // '0': 待审核，'1': 已审核
   deleted: { type: Boolean, default: false },
   create_time: { type: Number, default: getTime },
   update_time: Number,

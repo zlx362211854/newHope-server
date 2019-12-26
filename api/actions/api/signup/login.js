@@ -8,11 +8,13 @@ export default async req => {
     name: ['required', 'string'],
     pass: ['required', 'string']
   });
-  const user = await Login.findOne({name: args.name}).populate('avatar', {name: 1}).exec();
+  const user = await Login.findOne({name: args.name, deleted: false}).populate('avatar', {name: 1}).exec();
   if (!user) {
-    throw { code: code.fail, msg: '用户不存在！' };
+    throw {code: code.fail, msg: '用户不存在！'};
   } else if (user.pass !== args.pass) {
-    throw { code: code.fail, msg: '密码错误！' };
+    throw {code: code.fail, msg: '密码错误！'};
+  } else if (user.type == '0') {
+    throw {code: code.fail, msg: '该用户未通过审核，请联系管理员'};
   } else {
     req.session.user = user;
     req.session.exp = Date.now() + kExpirePeriod;

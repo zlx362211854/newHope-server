@@ -7,10 +7,12 @@ const Signup = mongoose.model("Signup");
 export default async req => {
   const args = await argsFilter(req.body, {
     name: ["required", "string"],
-    pass: ["required", "string"]
+    pass: ["required", "string"],
+    org: ["required", "string"],
   });
   const count = await Signup.count({
-    name: req.body.name
+    name: req.body.name,
+    deleted: false
   }).exec();
   if (count) {
     throw { code: code.fail, msg: "用户已存在！" };
