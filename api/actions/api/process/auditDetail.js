@@ -18,6 +18,6 @@ export default async req => {
         path: 'org'
       }
     ]
-  }).populate('files.file');
+  }).populate('conductor').populate('files.file');
   return { code: code.success, data: process };
 };
