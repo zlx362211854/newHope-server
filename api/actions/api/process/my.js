@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
-import {code} from "../../config";
+import { code } from "../../config";
 import {roleAuthPromise} from "../../lib/auth";
 const Process = mongoose.model("Process");
 export default async req => {
   await roleAuthPromise(req);
-  const processList = await Process.find({deleted: false}).populate({
+  const {_id: userId} = req.session.user
+
+  const processList = await Process.find({conductor: userId, deleted: false}).populate({
     path: 'creator',
     populate: [
       {
@@ -15,5 +17,5 @@ export default async req => {
       }
     ]
   }).populate('files.file').populate('conductor').sort({create_time: -1});
-  return {code: code.success, data: processList};
+  return { code: code.success, data: processList };
 };

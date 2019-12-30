@@ -9,24 +9,20 @@ export default async req => {
   await roleAuthPromise(req);
   const args = await argsFilter(req.body, {
     id: ["required", "string"],
-    target: ["required", "string"]
+    type: ["required", "string"]
   });
   const {user} = req.session
-  // 指派给自己
-  if (args.target === 'me') {
-    args.target = user._id
-  }
   const updatedProcess = await Process.findOneAndUpdate(
     { _id: args.id },
-    { $set: { conductor: args.target, status: 'accepted' } },
+    { $set: { status: args.type } },
     { new: true }
   );
   const targetUser = await Users.findOne({_id: args.target})
   const log = new Log({
     user: user._id,
     process: args.id,
-    type: 'assign',
-    content: `指派给${targetUser.name}`
+    type: args.type,
+    content: `将状态变更为:${args.type}`
   })
   await log.save()
   return { code: code.success, data: updatedProcess };
