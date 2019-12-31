@@ -7,4 +7,5 @@ export auditDetail from "./auditDetail";
 export assign from "./assign";
 export my from "./my";
 export update from "./update";
+export logs from "./logs";
 
