@@ -12,6 +12,7 @@ export default async req => {
   }
   const processList = await Process.find({creator: userId, deleted: false}).populate({
     path: 'creator',
+    select: '-pass',// 返回内容不包括pass字段
     populate: {
       path: 'avatar'
     }

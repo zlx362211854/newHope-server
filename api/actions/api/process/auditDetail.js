@@ -10,6 +10,7 @@ export default async req => {
   });
   const process = await Process.findOne({_id: args.id}).populate({
     path: 'creator',
+    select: '-pass',// 返回内容不包括pass字段
     populate: [
       {
         path: 'avatar'
@@ -18,6 +19,9 @@ export default async req => {
         path: 'org'
       }
     ]
-  }).populate('conductor').populate('files.file');
+  }).populate({
+    path: 'conductor',
+    select: '-pass'
+  }).populate('files.file');
   return { code: code.success, data: process };
 };
